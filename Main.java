@@ -1,9 +1,12 @@
-//needed main
+import arrays.*;
+import arrays.missingArrayElements;
 
-import arrays.*;          
-public class Main {
-    public static void main(String[] args) {
-        // Create an instance of the Solution class
+interface TestCase {
+    void runTests();
+}
+
+class MissingElementTest implements TestCase {
+    public void runTests() {
         missingElement solution = new missingElement();
         
         // Test case 1: From the problem description
@@ -40,5 +43,65 @@ public class Main {
         System.out.println("Input: [0, 1, 2, 3, 4]");
         System.out.println("Missing number: " + result4);
         System.out.println("Expected: 5");
+    }
+}
+
+class MissingArrayElementsTest implements TestCase {
+    public void runTests() {
+        missingArrayElements solution = new missingArrayElements();
+
+        // Test case 1
+        int[] nums1 = {4, 3, 2, 7, 8, 2, 3, 1};
+        System.out.println("Test case 1:");
+        System.out.println("Input: [4, 3, 2, 7, 8, 2, 3, 1]");
+        System.out.println("Missing numbers: " + solution.findDisappearedNumbers(nums1));
+        System.out.println("Expected: [5, 6]");
+        System.out.println();
+
+        // Test case 2
+        int[] nums2 = {1, 1};
+        System.out.println("Test case 2:");
+        System.out.println("Input: [1, 1]");
+        System.out.println("Missing numbers: " + solution.findDisappearedNumbers(nums2));
+        System.out.println("Expected: [2]");
+        System.out.println();
+    }
+}
+
+class TestRunner {
+    public static void runTest(String testName) {
+        TestCase test = null;
+        
+        // Register test classes here
+        switch (testName.toLowerCase()) {
+            case "missingelement":
+                test = new MissingElementTest();
+                break;
+            case "missingarrayelements":
+                test = new MissingArrayElementsTest();
+                break;
+            default:
+                System.out.println("Test class '" + testName + "' not found!");
+                System.out.println("Available tests: missingelement, missingarrayelements");
+                return;
+        }
+        
+        System.out.println("Running tests for: " + testName);
+        System.out.println("=========================");
+        test.runTests();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            // Default to running all tests
+            System.out.println("Running all available tests...\n");
+            TestRunner.runTest("missingelement");
+            TestRunner.runTest("missingarrayelements");
+        } else {
+            // Run specific test based on argument
+            TestRunner.runTest(args[0]);
+        }
     }
 }
