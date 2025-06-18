@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import arrays.*;
 import arrays.missingArrayElements;
 
@@ -68,6 +70,39 @@ class MissingArrayElementsTest implements TestCase {
     }
 }
 
+class numberSmallerThanCurrentTest implements TestCase {
+    public void runTests() {
+        numberSmallerThanCurrent solution = new numberSmallerThanCurrent();
+
+        // Test case 1
+        int[] nums1 = {8, 1, 2, 2, 3};
+        int[] result1 = solution.SmallerThanCurrent(nums1);
+        System.out.println("Test case 1:");
+        System.out.println("Input: [8, 1, 2, 2, 3]");
+        System.out.println("Output: " + Arrays.toString(result1));
+        System.out.println("Expected: [4, 0, 1, 1, 3]");
+        System.out.println();
+
+        // Test case 2
+        int[] nums2 = {6, 5, 4, 8};
+        int[] result2 = solution.SmallerThanCurrent(nums2);
+        System.out.println("Test case 2:");
+        System.out.println("Input: [6, 5, 4, 8]");
+        System.out.println("Output: " + Arrays.toString(result2));
+        System.out.println("Expected: [2, 1, 0, 3]");
+        System.out.println();
+
+        // Test case 3
+        int[] nums3 = {7, 7, 7, 7};
+        int[] result3 = solution.SmallerThanCurrent(nums3);
+        System.out.println("Test case 3:");
+        System.out.println("Input: [7, 7, 7, 7]");
+        System.out.println("Output: " + Arrays.toString(result3));
+        System.out.println("Expected: [0, 0, 0, 0]");
+        System.out.println();
+    }
+}
+
 class TestRunner {
     public static void runTest(String testName) {
         TestCase test = null;
@@ -80,9 +115,12 @@ class TestRunner {
             case "missingarrayelements":
                 test = new MissingArrayElementsTest();
                 break;
+            case "numbersmallerthancurrent":
+                test = new numberSmallerThanCurrentTest();
+                break;
             default:
                 System.out.println("Test class '" + testName + "' not found!");
-                System.out.println("Available tests: missingelement, missingarrayelements");
+                System.out.println("Available tests: missingelement, missingarrayelements, numbersmallerthancurrent");
                 return;
         }
         
@@ -99,6 +137,7 @@ public class Main {
             System.out.println("Running all available tests...\n");
             TestRunner.runTest("missingelement");
             TestRunner.runTest("missingarrayelements");
+            TestRunner.runTest("numbersmallerthancurrent");
         } else {
             // Run specific test based on argument
             TestRunner.runTest(args[0]);
